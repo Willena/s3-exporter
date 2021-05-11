@@ -3,12 +3,12 @@ package walker
 import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
+	"github.com/willena/s3-exporter/stats"
+	"github.com/willena/s3-exporter/utils"
 	"net/http"
 	"os"
 	"path/filepath"
 	"regexp"
-	"s3-exporter/stats"
-	"s3-exporter/utils"
 	"strings"
 )
 
@@ -41,7 +41,7 @@ func (b *baseWalker) Init(config Config, labels map[string]string, labelsNames [
 	return nil
 }
 
-func (b *baseWalker) ValidateConfig(config Config) error {
+func (b *baseWalker) ValidateConfig(Config) error {
 	return nil
 }
 

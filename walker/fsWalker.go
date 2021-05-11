@@ -3,10 +3,10 @@ package walker
 import (
 	"fmt"
 	log "github.com/sirupsen/logrus"
+	"github.com/willena/s3-exporter/utils"
 	"io/fs"
 	"os"
 	"path/filepath"
-	"s3-exporter/utils"
 )
 
 type FsWalkerConfig struct {

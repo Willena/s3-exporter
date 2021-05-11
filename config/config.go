@@ -3,8 +3,8 @@ package config
 import (
 	"github.com/jessevdk/go-flags"
 	log "github.com/sirupsen/logrus"
+	"github.com/willena/s3-exporter/walker"
 	"os"
-	"s3-exporter/walker"
 	"time"
 )
 
@@ -28,10 +28,7 @@ func LoadConfig() *Config {
 	log.Info("Loading configuration from arg or environment variables")
 	_, err := flags.ParseArgs(&opts, os.Args)
 	if err != nil {
-		if err.(*flags.Error).Type == flags.ErrHelp {
-			os.Exit(1)
-		}
-		log.Fatal("Could not read configuration: ", err.Error())
+		os.Exit(1)
 	}
 	return &opts
 }

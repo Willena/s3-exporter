@@ -4,10 +4,10 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	log "github.com/sirupsen/logrus"
+	"github.com/willena/s3-exporter/config"
+	"github.com/willena/s3-exporter/utils"
+	"github.com/willena/s3-exporter/walker"
 	"net/http"
-	"s3-exporter/config"
-	"s3-exporter/utils"
-	"s3-exporter/walker"
 	"strconv"
 	"time"
 )
