@@ -35,7 +35,7 @@ func (f *FsWalker) ValidateConfig(config Config) error {
 
 	var folder os.FileInfo
 	var err error
-	if folder, err = os.Stat("/path/to/whatever"); err != nil {
+	if folder, err = os.Stat(config.Folder); err != nil {
 		if os.IsNotExist(err) {
 			return fmt.Errorf("the specifed folder (%s) does not exist", config.Folder)
 		}
