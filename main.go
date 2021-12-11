@@ -22,7 +22,7 @@ func main() {
 
 	walkerInst, err := walker.FromConfig(opts.Walker, opts.WalkerType)
 	if err != nil {
-		log.Errorf(err.Error())
+		log.Fatal(err.Error())
 	}
 
 	initScheduler(walkerInst, opts.ScrapeInterval)
