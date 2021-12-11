@@ -5,9 +5,9 @@ import (
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
 	log "github.com/sirupsen/logrus"
+	"github.com/willena/s3-exporter/utils"
 	"net/url"
 	"regexp"
-	"s3-exporter/utils"
 )
 
 type S3WalkerConfig struct {
@@ -106,7 +106,7 @@ func (s *S3Walker) Walk() error {
 	return err
 }
 
-func (s *S3Walker) ValidateConfig(config Config) error {
+func (s *S3Walker) ValidateConfig(Config) error {
 	return nil
 }
 

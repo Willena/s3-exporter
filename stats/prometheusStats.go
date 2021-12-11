@@ -3,7 +3,7 @@ package stats
 import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"s3-exporter/utils"
+	"github.com/willena/s3-exporter/utils"
 	"time"
 )
 

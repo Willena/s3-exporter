@@ -1,4 +1,4 @@
-module s3-exporter
+module github.com/willena/s3-exporter
 
 go 1.16
 
