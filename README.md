@@ -48,14 +48,14 @@ Walkers configuration:
 --walker.folder:                Folder to be used for FS walker (default: /) [env: WALKER_FOLDER]
 
 S3 Configuration:
---walker.S3.endpoint:           URL to the S3 [env: WALKER_S3_ENDPOINT]
---walker.S3.bucket:             S3 bucket [env: WALKER_S3_BUCKET]
---walker.S3.class:              S3 Storage Class (default: STANDARD) [env: WALKER_S3_CLASS]
---walker.S3.access-key:         S3 Storage Access Key [env: WALKER_S3_ACCESS_KEY]
---walker.S3.token:              S3 Access token [env: WALKER_S3_TOKEN]
---walker.S3.secret-key:         S3 Storage Secret Key [env: WALKER_S3_SECRET_KEY]
---walker.S3.region:             S3 Storage Region (default: us-west) [env: WALKER_S3_REGION]
---walker.S3.bucket-path-style   Bucket type [env: WALKER_S3_BUCKET_PATH_STYLE]
+--walker.s3.endpoint:           URL to the S3 [env: WALKER_S3_ENDPOINT]
+--walker.s3.bucket:             S3 bucket [env: WALKER_S3_BUCKET]
+--walker.s3.class:              S3 Storage Class (default: STANDARD) [env: WALKER_S3_CLASS]
+--walker.s3.access-key:         S3 Storage Access Key [env: WALKER_S3_ACCESS_KEY]
+--walker.s3.token:              S3 Access token [env: WALKER_S3_TOKEN]
+--walker.s3.secret-key:         S3 Storage Secret Key [env: WALKER_S3_SECRET_KEY]
+--walker.s3.region:             S3 Storage Region (default: us-west) [env: WALKER_S3_REGION]
+--walker.s3.bucket-path-style   Bucket type [env: WALKER_S3_BUCKET_PATH_STYLE]
 
 HTTP Server configuration:
 --http.port:                    HTTP(s) server port (default: 6535) [env: PORT]
