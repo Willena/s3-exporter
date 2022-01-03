@@ -32,6 +32,18 @@ func main() {
 func startServer(serverConf config.ServerConfiguration) {
 	r := mux.NewRouter()
 	r.Handle("/metrics", promhttp.Handler())
+	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		_, err := w.Write([]byte(`<html>
+			<head><title>Elasticsearch Exporter</title></head>
+			<body>
+			<h1>Elasticsearch Exporter</h1>
+			<p><a href="/metrics">Metrics</a></p>
+			</body>
+			</html>`))
+		if err != nil {
+			log.Errorf("failed handling writer: %s", err.Error())
+		}
+	})
 
 	listen := serverConf.Listen + ":" + strconv.Itoa(serverConf.Port)
 	var err error
