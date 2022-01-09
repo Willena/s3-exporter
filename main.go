@@ -34,9 +34,9 @@ func startServer(serverConf config.ServerConfiguration) {
 	r.Handle("/metrics", promhttp.Handler())
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		_, err := w.Write([]byte(`<html>
-			<head><title>Elasticsearch Exporter</title></head>
+			<head><title>S3 Exporter</title></head>
 			<body>
-			<h1>Elasticsearch Exporter</h1>
+			<h1>S3 Exporter</h1>
 			<p><a href="/metrics">Metrics</a></p>
 			</body>
 			</html>`))

@@ -45,7 +45,7 @@ func (s *S3Walker) Init(config Config, labels map[string]string, _ []string) err
 		utils.MergeMapsRight(map[string]string{
 			"type":       "s3Walker",
 			"s3Endpoint": s.config.Endpoint,
-		}, labels), []string{"bucket"})
+		}, labels), []string{"bucket", "storageClass"})
 }
 
 func (s *S3Walker) createClient() *minio.Client {
@@ -125,17 +125,19 @@ func (s *S3Walker) findObjects(context_bg context.Context, bucket minio.BucketIn
 	//defer wait.Done()
 	defer cancel()
 
-	labels := map[string]string{"bucket": bucket.Name}
-
 	objectCh := s.client.ListObjects(ctx, bucket.Name, minio.ListObjectsOptions{
 		Recursive: true,
 	})
 	for object := range objectCh {
 		if object.Err != nil {
 			log.Warning("Object warning", object.Err.Error())
-			return
+			continue
 		}
-		s.ProcessFile(bucket.Name, object.Key, object.Size, s.baseWalker.config.Depth, object.ContentType, labels)
+		s.ProcessFile(bucket.Name,
+			object.Key, object.Size,
+			s.baseWalker.config.Depth,
+			object.ContentType,
+			map[string]string{"bucket": bucket.Name, "storageClass": object.StorageClass})
 	}
 }
 

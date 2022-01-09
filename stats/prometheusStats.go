@@ -34,11 +34,11 @@ func (p *PrometheusStats) ProcessFile(prefix string, size uint64, depth uint64, 
 
 	if depth >= p.maxDepth {
 		p.maxDepth = depth
-		p.MaxDepth.With(nil).Set(float64(depth))
+		p.MaxDepth.With(labels).Set(float64(depth))
 	}
 
-	p.TotalObjectsCount.With(nil).Add(1)
-	p.TotalObjectsSize.With(nil).Add(float64(size))
+	p.TotalObjectsCount.With(labels).Add(1)
+	p.TotalObjectsSize.With(labels).Add(float64(size))
 
 	prefixLabel := utils.MergeMapsRight(prometheus.Labels{
 		"prefix": prefix,
@@ -114,16 +114,20 @@ func createHistogramVect(name, help string, labels prometheus.Labels, start, fac
 
 func NewPrometheusStatsHolder(constLabels prometheus.Labels, names []string, start, factor float64, number int) StatsInterface {
 
-	namesWithPrefix := append(names, "prefix")
-	namesWithPrefixAndExt := append(namesWithPrefix, "ext")
-	namesWithPrefixAndContentType := append(namesWithPrefix, "contentType")
+	namesWithPrefix := []string{"prefix"}
+	namesWithPrefixAndExt := []string{"ext", "prefix"}
+	namesWithPrefixAndContentType := []string{"prefix", "contentType"}
+
+	namesWithPrefix = append(namesWithPrefix, names...)
+	namesWithPrefixAndExt = append(namesWithPrefixAndExt, names...)
+	namesWithPrefixAndContentType = append(namesWithPrefixAndContentType, names...)
 
 	return &PrometheusStats{
-		MaxDepth:                           createGaugeVect("max_tree_depth", "Maximum depth of folder tree", constLabels, nil),
 		CollectDuration:                    createGaugeVect("stats_collection_duration", "Time spent reading object and folders", constLabels, nil),
-		TotalObjectsSize:                   createGaugeVect("total_objects_size", "Total objects volume in bytes", constLabels, nil),
-		TotalObjectsCount:                  createGaugeVect("total_objects_count", "total number of objects found", constLabels, nil),
 		LastWalkStart:                      createGaugeVect("stats_collection_date", "Date when the stats collection started", constLabels, nil),
+		MaxDepth:                           createGaugeVect("max_tree_depth", "Maximum depth of folder tree", constLabels, names),
+		TotalObjectsSize:                   createGaugeVect("total_objects_size", "Total objects volume in bytes", constLabels, names),
+		TotalObjectsCount:                  createGaugeVect("total_objects_count", "total number of objects found", constLabels, names),
 		PerPrefixObjectsSizeHistogram:      createHistogramVect("objects_sizes_count", "Histogram showing the files size repartition across prefixes", constLabels, start, factor, number, namesWithPrefix),
 		PerPrefixObjectsSize:               createGaugeVect("objects_size", "Objects volume across prefixes", constLabels, namesWithPrefix),
 		PerPrefixObjectsCount:              createGaugeVect("objects_count", "Objects count across prefixes", constLabels, namesWithPrefix),
