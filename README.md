@@ -30,42 +30,59 @@ Note: This exporter uses the Minio S3 client, and uses the ListBuckets, ListObje
 
 ```
 Usage:
-./s3_exporter [OPTIONS]
+  s3-exporter [OPTIONS]
 
 Application Options:
---type:[s3|fs]                  Walker type [env: WALKER_TYPE]
---interval:                     Define the minimum delay between scrapes. Set this to a reasonable value to avoid unnecessary stress on drives (default: 10m) [SCRAPE_INTERVAL]
---logLevel:                     Level for logger; available options are: debug, info, warning, error (default: debug) [LOG_LEVEL]
+      --type=[s3|fs]                 Walker type [$WALKER_TYPE]
+      --interval=                    Define the minimum delay between scrapes.
+                                     Set this to a reasonable value to avoid
+                                     unnecessary stress on drives (default:
+                                     10m) [$SCRAPE_INTERVAL]
+      --logLevel=                    Level for logger; available options are:
+                                     debug, info, warning, error (default:
+                                     debug) [$LOG_LEVEL]
 
 Walkers configuration:
---walker.maxDepth:              Maximum lookup depth; Will be used to group paths and results (default: 1) [env: WALKER_MAX_DEPTH]
---walker.histogram-bins:        Number of bins for histograms (default: 30) [env: WALKER_HISTOGRAM_BINS]
---walker.histogram-start:       Value of first bin in bytes (default: 10_000_000) [env: WALKER_HISTOGRAM_START]
---walker.histogram-factor:      How much do we increase the size of bins (exponentially) (default: 1.5) [env: WALKER_HISTOGRAM_FACTOR]
---walker.prefix-filter:         Prefixes or part of prefix to be ignored [env: WALKER_PREFIX_FILTER]
---walker.custom-labels:         Labels to add for prometheus exporters [env: WALKER_CUSTOM_LABELS]
---walker.bucket-filter:         Exclude buckets based on name [env: WALKER_BUCKET_FILTER]
---walker.folder:                Folder to be used for FS walker (default: /) [env: WALKER_FOLDER]
+      --walker.maxDepth=             Maximum lookup depth; Will be used to
+                                     group paths and results (default: 1)
+                                     [$WALKER_MAX_DEPTH]
+      --walker.histogram-bins=       Number of bins for histograms (default:
+                                     30) [$WALKER_HISTOGRAM_BINS]
+      --walker.histogram-start=      Value of first bin in bytes (default:
+                                     10_000_000) [$WALKER_HISTOGRAM_START]
+      --walker.histogram-factor=     How much do we increase the size of bins
+                                     (exponentially) (default: 1.5)
+                                     [$WALKER_HISTOGRAM_FACTOR]
+      --walker.prefix-filter=        Prefixes or part of prefix to be ignored
+                                     [$WALKER_PREFIX_FILTER]
+      --walker.custom-labels=        Labels to add for prometheus exporters
+                                     [$WALKER_CUSTOM_LABELS]
+      --walker.bucket-filter=        Exclude buckets based on name
+                                     [$WALKER_BUCKET_FILTER]
+      --walker.folder=               Folder to be used for FS walker (default:
+                                     /) [$WALKER_FOLDER]
 
 S3 Configuration:
---walker.s3.endpoint:           URL to the S3 [env: WALKER_S3_ENDPOINT]
---walker.s3.bucket:             S3 bucket [env: WALKER_S3_BUCKET]
---walker.s3.class:              S3 Storage Class (default: STANDARD) [env: WALKER_S3_CLASS]
---walker.s3.access-key:         S3 Storage Access Key [env: WALKER_S3_ACCESS_KEY]
---walker.s3.token:              S3 Access token [env: WALKER_S3_TOKEN]
---walker.s3.secret-key:         S3 Storage Secret Key [env: WALKER_S3_SECRET_KEY]
---walker.s3.region:             S3 Storage Region (default: us-west) [env: WALKER_S3_REGION]
---walker.s3.bucket-path-style   Bucket type [env: WALKER_S3_BUCKET_PATH_STYLE]
+      --walker.s3.endpoint=          URL to the S3 [$WALKER_S3_ENDPOINT]
+      --walker.s3.bucket=            S3 bucket [$WALKER_S3_BUCKET]
+      --walker.s3.access-key=        S3 Storage Access Key
+                                     [$WALKER_S3_ACCESS_KEY]
+      --walker.s3.secret-key=        S3 Storage Secret Key
+                                     [$WALKER_S3_SECRET_KEY]
+      --walker.s3.region=            S3 Storage Region (default: us-west)
+                                     [$WALKER_S3_REGION]
+      --walker.s3.bucket-path-style  Bucket type [$WALKER_S3_BUCKET_PATH_STYLE]
 
 HTTP Server configuration:
---http.port:                    HTTP(s) server port (default: 6535) [env: PORT]
---http.addr:                    HTTP(s) listen address [env: ADDR]
---http.keyFile:                 Required along with certFile to enable HTTPS [env: KEY_FILE]
---http.certFile:                Required along with keyFile to enable HTTPS [env: CERT_FILE]
+      --http.port=                   HTTP(s) server port (default: 6535) [$PORT]
+      --http.addr=                   HTTP(s) listen address [$ADDR]
+      --http.keyFile=                Required along with certFile to enable
+                                     HTTPS [$KEY_FILE]
+      --http.certFile=               Required along with keyFile to enable
+                                     HTTPS [$CERT_FILE]
 
 Help Options:
--?                                 Show this help message
--h, --help                          Show this help message
+  -h, --help                         Show this help message
 ```
 
 ## License
