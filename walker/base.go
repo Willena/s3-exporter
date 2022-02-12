@@ -2,6 +2,7 @@ package walker
 
 import (
 	"fmt"
+	"github.com/prometheus/client_golang/prometheus"
 	log "github.com/sirupsen/logrus"
 	"github.com/willena/s3-exporter/stats"
 	"github.com/willena/s3-exporter/utils"
@@ -37,6 +38,7 @@ func (b *baseWalker) Init(config Config, labels map[string]string, labelsNames [
 
 	b.prefixPattern = utils.BuildPatternsFromStrings(b.config.PrefixFilters)
 	b.Stats = stats.NewPrometheusStatsHolder(labels, labelsNames, b.config.BinStart, b.config.BinIncrementFactor, b.config.BinNumber)
+	prometheus.MustRegister(b.Stats)
 	b.blockFlag = false
 	return nil
 }
