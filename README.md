@@ -1,6 +1,6 @@
 # S3 Exporter
 
-![https://img.shields.io/docker/v/gillena/s3-exporter?color=blue&label=Docker%20Hub](https://img.shields.io/docker/v/gillena/s3-exporter?color=blue&label=Docker%20Hub)
+[![dockerhub](https://img.shields.io/docker/v/gillena/s3-exporter?color=blue&label=Docker%20Hub)](https://hub.docker.com/r/gillena/s3-exporter)
 
 A prometheus exporter that expose FS or S3 metrics (file count, volumes, extensions, ...)
 
